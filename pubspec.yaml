@@ -25,7 +25,7 @@ dependencies:
   #for date formatting
   intl: ^0.18.0
 
-  octo_image: ^1.0.1
+  octo_image: ^2.0.0
 
 dev_dependencies:
   flutter_test:
