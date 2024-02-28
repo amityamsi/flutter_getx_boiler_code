@@ -12,6 +12,7 @@ The boilerplate contains the minimal implementation required to create a new lib
 
 Download or clone this repo by using the link below:
 
+https://github.com/amityamsi/flutter_getx_boiler_code
 
 Or simply click on the **Use this template** button and make your own repository using this template.
 
