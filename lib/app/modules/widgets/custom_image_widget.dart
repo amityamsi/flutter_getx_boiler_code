@@ -31,7 +31,8 @@ class CustomImageWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return (radius != null || borderRadius != null)
         ? ClipRRect(
-            borderRadius: borderRadius ?? radius?.borderRadius,
+                    borderRadius: BorderRadius.circular(radius??0),
+
             child: child,
           )
         : child;
@@ -47,9 +48,10 @@ class CustomImageWidget extends StatelessWidget {
                   image: NetworkImage(
                     imageUrl ?? Constants.dummyImageUrl,
                   ),
-                  placeholderBuilder: OctoPlaceholder.blurHash(
-                    Constants.placeHolderBlurHash,
-                  ),
+                  placeholderBuilder:OctoPlaceholder.circleAvatar(backgroundColor: AppColors.caribbeanGreen,text:const Text("No Image")),
+               
+                   
+              
                   errorBuilder: (context, error, stackTrace) {
                     return placeholder;
                   },
