@@ -1,144 +1,56 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_getx_starter_template/app/common/util/extensions.dart';
-import 'package:flutter_getx_starter_template/app/common/values/app_colors.dart';
-import 'package:flutter_getx_starter_template/app/common/values/styles/app_text_style.dart';
-import 'package:flutter_getx_starter_template/app/common/values/styles/dimens.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-abstract class AppTheme {
-  static ThemeData get theme {
-    final inputBorder = 16.outlineInputBorder(
-      borderSide: 3.borderSide(),
-    );
+import '../app_colors.dart';
+import '../strings.dart';
 
-    final hintStyle = AppTextStyle.semiBoldStyle.copyWith(
-      color: AppColors.doveGray,
-      fontSize: Dimens.fontSize14,
-    );
+class AppTheme {
+  static const String _fontFamily = AppStrings.fontFamily;
+  // static const String _fontFamily = AppString.fontFamilyRubik;
 
-    return ThemeData(
-      brightness: Brightness.light,
-      primaryColor: AppColors.kPrimaryColor,
-      visualDensity: VisualDensity.adaptivePlatformDensity,
-      appBarTheme: const AppBarTheme(
-        color: AppColors.kPrimaryColor,
-      ),
-      primaryTextTheme: AppTextStyle.textTheme,
-      buttonTheme: ButtonThemeData(
-        buttonColor: AppColors.kPrimaryColor,
-        height: 45.h,
-        textTheme: ButtonTextTheme.primary,
-        shape: RoundedRectangleBorder(
-          borderRadius: 23.borderRadius,
-        ),
-      ),
-      textButtonTheme: TextButtonThemeData(
-        style: ButtonStyle(
-          padding: MaterialStateProperty.resolveWith(
-            (_) => EdgeInsets.zero,
-          ),
-          overlayColor: MaterialStateProperty.resolveWith<Color?>(
-            (Set<MaterialState> states) {
-              if (states.contains(MaterialState.pressed)) {
-                return Colors.white.withOpacity(.14);
-              }
+  static const TextStyle _baseTextStyle = TextStyle(
+      color: Colors.white,
+      fontWeight: FontWeight.w300,
+      fontFamily: AppStrings.fontFamily
+    // fontFamily: AppString.fontFamilyRubik
+  );
 
-              return null;
-            },
-          ),
-          textStyle: MaterialStateProperty.resolveWith<TextStyle>(
-            (_) => AppTextStyle.buttonTextStyle,
-          ),
-          shape: MaterialStateProperty.resolveWith<RoundedRectangleBorder>(
-            (states) => RoundedRectangleBorder(
-              borderRadius: 10.borderRadius,
-            ),
-          ),
-          backgroundColor: MaterialStateProperty.resolveWith<Color?>(
-            (Set<MaterialState> states) {
-              if (states.contains(MaterialState.disabled)) {
-                return AppColors.doveGray;
-              }
-              return null;
-            },
-          ),
-        ),
-      ),
-      elevatedButtonTheme: ElevatedButtonThemeData(
-        style: ButtonStyle(
-          padding: MaterialStateProperty.resolveWith(
-            (_) => EdgeInsets.zero,
-          ),
-          overlayColor: MaterialStateProperty.resolveWith<Color?>(
-            (Set<MaterialState> states) {
-              if (states.contains(MaterialState.pressed)) {
-                return Colors.white.withOpacity(.14);
-              }
 
-              return null;
-            },
-          ),
-          textStyle: MaterialStateProperty.resolveWith<TextStyle>(
-            (_) => AppTextStyle.buttonTextStyle,
-          ),
-          shape: MaterialStateProperty.resolveWith<RoundedRectangleBorder>(
-            (states) => RoundedRectangleBorder(
-              borderRadius: 10.borderRadius,
-            ),
-          ),
-        ),
+  static final ThemeData _primaryTheme = ThemeData(
+    brightness: Brightness.light,
+    textTheme: TextTheme(
+      bodySmall: _baseTextStyle.copyWith(fontSize: 10.spMin),
+      bodyMedium: _baseTextStyle.copyWith(fontSize: 12.spMin),
+      bodyLarge: _baseTextStyle.copyWith(
+        fontSize: 14.spMin,
       ),
-      floatingActionButtonTheme: const FloatingActionButtonThemeData(
-        elevation: 4,
-        backgroundColor: AppColors.kPrimaryColor,
+      displayLarge: _baseTextStyle.copyWith(fontSize: 20.spMin),
+      displayMedium: _baseTextStyle.copyWith(fontSize: 18.spMin),
+      displaySmall: _baseTextStyle.copyWith(
+          fontSize: 16.spMin,
+          fontWeight: FontWeight.w400
       ),
-      textTheme: TextTheme(
-        subtitle1: AppTextStyle.regularStyle.copyWith(
-          color: AppColors.mineShaft,
-          fontSize: Dimens.fontSize14,
-        ),
-      ),
-      inputDecorationTheme: InputDecorationTheme(
-        filled: true,
-        contentPadding: const EdgeInsets.symmetric(
-          horizontal: 12,
-          vertical: 3,
-        ),
-        prefixStyle: AppTextStyle.regularStyle.copyWith(
-          fontSize: Dimens.fontSize14,
-          color: AppColors.black,
-        ),
-        hintStyle: hintStyle,
-        labelStyle: hintStyle,
-        enabledBorder: inputBorder,
-        disabledBorder: inputBorder,
-        focusedBorder: inputBorder,
-        border: inputBorder,
-      ),
-      cardTheme: CardTheme(
-        color: Colors.white.withOpacity(0.85),
-        shape: RoundedRectangleBorder(
-          borderRadius: 10.borderRadius,
-        ),
-      ),
-      dialogTheme: DialogTheme(
-        backgroundColor: Colors.white,
-        shape: RoundedRectangleBorder(
-          borderRadius: 20.borderRadius,
-        ),
-      ),
-      bottomSheetTheme: BottomSheetThemeData(
-        backgroundColor: Colors.white,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(23.r),
-            topRight: Radius.circular(23.r),
-          ),
-        ),
-      ),
-      colorScheme: ColorScheme.fromSwatch().copyWith(
-        secondary: AppColors.kPrimaryColor,
-      ),
-    );
-  }
+      headlineSmall: _baseTextStyle.copyWith(
+          fontSize: 22.spMin, fontWeight: FontWeight.w500),
+      headlineMedium: _baseTextStyle.copyWith(
+          fontSize: 24.spMin, fontWeight: FontWeight.w500),
+      headlineLarge: _baseTextStyle.copyWith(
+          fontSize: 26.spMin, fontWeight: FontWeight.w500),
+    ),
+    useMaterial3: false,
+
+    fontFamily: _fontFamily,
+    scaffoldBackgroundColor: AppColors.black,
+    appBarTheme: const AppBarTheme(backgroundColor: AppColors.black),
+    textSelectionTheme: const TextSelectionThemeData(
+      cursorColor: AppColors.black,
+      selectionColor: AppColors.black,
+      selectionHandleColor: AppColors.white,
+    ),
+    colorScheme: ColorScheme.light(primary: AppColors.white),
+  );
+
+  const AppTheme._(); // Private constructor to prevent instantiation.
+
+  static ThemeData get theme => _primaryTheme;
 }

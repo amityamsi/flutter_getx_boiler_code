@@ -15,8 +15,8 @@ class CustomErrorWidget extends StatelessWidget {
     return Scaffold(
       body: Center(
         child: Text(
-          message ?? Strings.somethingWentWrong,
-          style: Get.textTheme.headline5,
+          message ?? AppStrings.somethingWentWrong,
+          style: Get.textTheme.bodyLarge,
         ),
       ),
     );

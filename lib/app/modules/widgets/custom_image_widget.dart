@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_getx_starter_template/app/common/constants.dart';
 import 'package:flutter_getx_starter_template/app/common/util/exports.dart';
@@ -31,8 +30,7 @@ class CustomImageWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return (radius != null || borderRadius != null)
         ? ClipRRect(
-                    borderRadius: BorderRadius.circular(radius??0),
-
+            borderRadius: BorderRadius.circular(radius ?? 0),
             child: child,
           )
         : child;
@@ -48,10 +46,9 @@ class CustomImageWidget extends StatelessWidget {
                   image: NetworkImage(
                     imageUrl ?? Constants.dummyImageUrl,
                   ),
-                  placeholderBuilder:OctoPlaceholder.circleAvatar(backgroundColor: AppColors.caribbeanGreen,text:const Text("No Image")),
-               
-                   
-              
+                  placeholderBuilder: OctoPlaceholder.circleAvatar(
+                      backgroundColor: AppColors.caribbeanGreen,
+                      text: const Text("No Image")),
                   errorBuilder: (context, error, stackTrace) {
                     return placeholder;
                   },

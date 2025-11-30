@@ -14,7 +14,7 @@ abstract class ApiResponse {
     if (status.connectionError) {
       throw const ApiError(
         type: ErrorType.noConnection,
-        error: Strings.noConnection,
+        error: AppStrings.noConnection,
       );
     }
 
@@ -31,13 +31,13 @@ abstract class ApiResponse {
             if (res['errorcode'].toString() == 'invalidtoken') {
               throw const ApiError(
                 type: ErrorType.response,
-                error: Strings.unauthorize,
+                error: AppStrings.unauthorize,
               );
             } else {
               throw ApiError(
                 type: ErrorType.response,
                 error: res['msg']?.toString() ??
-                    (res['message']?.toString() ?? Strings.unknownError),
+                    (res['message']?.toString() ?? AppStrings.unknownError),
               );
             }
           }
@@ -50,29 +50,29 @@ abstract class ApiResponse {
         } else if (status.code == HttpStatus.requestTimeout) {
           throw const ApiError(
             type: ErrorType.connectTimeout,
-            error: Strings.connectionTimeout,
+            error: AppStrings.connectionTimeout,
           );
         } else if (response.unauthorized) {
           throw ApiError(
             type: ErrorType.unauthorize,
-            error: res['msg']?.toString() ?? Strings.unauthorize,
+            error: res['msg']?.toString() ?? AppStrings.unauthorize,
           );
         } else {
           throw ApiError(
             type: ErrorType.response,
-            error: res['msg']?.toString() ?? Strings.unknownError,
+            error: res['msg']?.toString() ?? AppStrings.unknownError,
           );
         }
       }
     } on FormatException {
       throw const ApiError(
         type: ErrorType.unknownError,
-        error: Strings.unknownError,
+        error: AppStrings.unknownError,
       );
     } on TimeoutException catch (e) {
       throw ApiError(
         type: ErrorType.connectTimeout,
-        error: e.message?.toString() ?? Strings.connectionTimeout,
+        error: e.message?.toString() ?? AppStrings.connectionTimeout,
       );
     }
   }

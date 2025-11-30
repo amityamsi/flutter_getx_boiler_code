@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_getx_starter_template/app/common/constants.dart';
 import 'package:flutter_getx_starter_template/app/common/util/exports.dart';
-import 'package:flutter_getx_starter_template/app/data/api_response.dart';
-import 'package:flutter_getx_starter_template/app/data/errors/api_error.dart';
-import 'package:flutter_getx_starter_template/app/data/interface_controller/api_interface_controller.dart';
-import 'package:flutter_getx_starter_template/app/routes/app_pages.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import '../../data/api_response.dart';
+import '../../data/errors/api_error.dart';
+import '../../data/interface_controller/api_interface_controller.dart';
+import '../constants.dart';
 
-import 'loading_dialog.dart';
 
 abstract class Extensions {}
 
@@ -95,27 +93,24 @@ extension FutureExt<T> on Future<Response<T>?> {
     required VoidCallback retryFunction,
     bool showLoading = true,
   }) {
-    final _interface = Get.find<ApiInterfaceController>();
-    _interface.error = null;
+    final interface = Get.find<ApiInterfaceController>();
+    interface.error = null;
 
-    if (showLoading) LoadingDialog.showLoadingDialog();
+
 
     this.timeout(
       Constants.timeout,
       onTimeout: () {
-        LoadingDialog.closeLoadingDialog();
 
-        Utils.showSnackbar(Strings.connectionTimeout);
-
-        _retry(_interface, retryFunction);
+        _retry(interface, retryFunction);
 
         throw const ApiError(
           type: ErrorType.connectTimeout,
-          error: Strings.connectionTimeout,
+          error: AppStrings.connectionTimeout,
         );
       },
     ).then((value) {
-      LoadingDialog.closeLoadingDialog();
+
 
       if (value?.body != null) {
         final result = ApiResponse.getResponse<T>(value!);
@@ -124,9 +119,8 @@ extension FutureExt<T> on Future<Response<T>?> {
         }
       }
 
-      _interface.update();
+      interface.update();
     }).catchError((e) {
-      LoadingDialog.closeLoadingDialog();
 
       if (e == null) return;
 
@@ -135,13 +129,13 @@ extension FutureExt<T> on Future<Response<T>?> {
       if (e is ApiError) {
         if ((e.type == ErrorType.connectTimeout ||
             e.type == ErrorType.noConnection)) {
-          _interface.error = e;
+          interface.error = e;
 
-          _retry(_interface, retryFunction);
+          _retry(interface, retryFunction);
         } else {
-          Utils.showDialog(
+       /*   Utils.showDialog(
             errorMessage,
-            onTap: errorMessage != Strings.unauthorize
+            onTap: errorMessage != AppStrings.unauthorize
                 ? null
                 : () {
                     Storage.clearStorage();
@@ -151,7 +145,7 @@ extension FutureExt<T> on Future<Response<T>?> {
                       //user can login again on UnauthorizeError error
                     );
                   },
-          );
+          );*/
         }
       }
 
@@ -164,11 +158,11 @@ extension FutureExt<T> on Future<Response<T>?> {
   }
 
   void _retry(
-    ApiInterfaceController _interface,
+    ApiInterfaceController interface,
     VoidCallback retryFunction,
   ) {
-    _interface.retry = retryFunction;
-    _interface.update();
+    interface.retry = retryFunction;
+    interface.update();
   }
 }
 
