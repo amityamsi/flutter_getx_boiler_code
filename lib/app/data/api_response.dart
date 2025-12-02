@@ -1,12 +1,11 @@
 import 'dart:async';
 import 'dart:convert';
-
-import 'package:flutter_getx_starter_template/app/common/values/strings.dart';
+import 'package:flutter_getx_starter_template/app/constants/app_strings.dart';
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/status/http_status.dart';
-
 import 'errors/api_error.dart';
 
+// Update configs accordingly
 abstract class ApiResponse {
   static T? getResponse<T>(Response<T> response) {
     final status = response.status;
@@ -14,7 +13,7 @@ abstract class ApiResponse {
     if (status.connectionError) {
       throw const ApiError(
         type: ErrorType.noConnection,
-        error: Strings.noConnection,
+        error: AppStrings.noConnection,
       );
     }
 
@@ -31,13 +30,14 @@ abstract class ApiResponse {
             if (res['errorcode'].toString() == 'invalidtoken') {
               throw const ApiError(
                 type: ErrorType.response,
-                error: Strings.unauthorize,
+                error: AppStrings.unauthorize,
               );
             } else {
               throw ApiError(
                 type: ErrorType.response,
-                error: res['msg']?.toString() ??
-                    (res['message']?.toString() ?? Strings.unknownError),
+                error:
+                    res['msg']?.toString() ??
+                    (res['message']?.toString() ?? AppStrings.unknownError),
               );
             }
           }
@@ -50,29 +50,29 @@ abstract class ApiResponse {
         } else if (status.code == HttpStatus.requestTimeout) {
           throw const ApiError(
             type: ErrorType.connectTimeout,
-            error: Strings.connectionTimeout,
+            error: AppStrings.connectionTimeout,
           );
         } else if (response.unauthorized) {
           throw ApiError(
             type: ErrorType.unauthorize,
-            error: res['msg']?.toString() ?? Strings.unauthorize,
+            error: res['msg']?.toString() ?? AppStrings.unauthorize,
           );
         } else {
           throw ApiError(
             type: ErrorType.response,
-            error: res['msg']?.toString() ?? Strings.unknownError,
+            error: res['msg']?.toString() ?? AppStrings.unknownError,
           );
         }
       }
     } on FormatException {
       throw const ApiError(
         type: ErrorType.unknownError,
-        error: Strings.unknownError,
+        error: AppStrings.unknownError,
       );
     } on TimeoutException catch (e) {
       throw ApiError(
         type: ErrorType.connectTimeout,
-        error: e.message?.toString() ?? Strings.connectionTimeout,
+        error: e.message?.toString() ?? AppStrings.connectionTimeout,
       );
     }
   }

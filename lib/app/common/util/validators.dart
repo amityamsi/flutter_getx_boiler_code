@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 abstract class Validators {
   static String? validateEmpty(String? v) {
     if (v!.isEmpty) {
-      return Strings.fieldCantBeEmpty;
+      return AppStrings.fieldCantBeEmpty;
     } else {
       return null;
     }
@@ -12,7 +12,7 @@ abstract class Validators {
 
   static String? validateTEmpty<T>(T? v) {
     if (v == null) {
-      return Strings.fieldCantBeEmpty;
+      return AppStrings.fieldCantBeEmpty;
     } else {
       return null;
     }
@@ -20,9 +20,9 @@ abstract class Validators {
 
   static String? validateEmail(String? v) {
     if (v!.isEmpty) {
-      return Strings.emailCantBeEmpty;
+      return AppStrings.emailCantBeEmpty;
     } else if (!GetUtils.isEmail(v)) {
-      return Strings.enterValidEmail;
+      return AppStrings.enterValidEmail;
     } else {
       return null;
     }
@@ -30,9 +30,9 @@ abstract class Validators {
 
   static String? validatePhone(String? v) {
     if (v!.isEmpty) {
-      return Strings.fieldCantBeEmpty;
+      return AppStrings.fieldCantBeEmpty;
     } else if (v.length != 10) {
-      return Strings.enterValidNumber;
+      return AppStrings.enterValidNumber;
     } else {
       return null;
     }
@@ -40,7 +40,7 @@ abstract class Validators {
 
   static String? validateEmailPhone(String? v) {
     if (v!.isEmpty) {
-      return Strings.fieldCantBeEmpty;
+      return AppStrings.fieldCantBeEmpty;
     } else if (GetUtils.isNumericOnly(v)) {
       return validatePhone(v);
     } else {
@@ -50,9 +50,9 @@ abstract class Validators {
 
   static String? validatePassword(String? v) {
     if (v!.isEmpty) {
-      return Strings.passwordCantBeEmpty;
+      return AppStrings.passwordCantBeEmpty;
     } else if (v.length < 8) {
-      return Strings.passwordValidation;
+      return AppStrings.passwordValidation;
     } else {
       return null;
     }
@@ -60,9 +60,9 @@ abstract class Validators {
 
   static String? validateConfirmPassword(String? v, String password) {
     if (v!.isEmpty || password.isEmpty) {
-      return Strings.passwordCantBeEmpty;
+      return AppStrings.passwordCantBeEmpty;
     } else if (v.length < 8 || password.length < 8 || v != password) {
-      return Strings.confirmPasswordValidation;
+      return AppStrings.confirmPasswordValidation;
     } else {
       return null;
     }
@@ -70,7 +70,7 @@ abstract class Validators {
 
   static String? validateCheckbox({
     bool v = false,
-    String error = Strings.checkboxValidation,
+    String error = AppStrings.checkboxValidation,
   }) {
     if (!v) {
       return error;
