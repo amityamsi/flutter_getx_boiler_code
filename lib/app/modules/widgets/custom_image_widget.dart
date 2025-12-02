@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_getx_starter_template/app/common/constants.dart';
 import 'package:flutter_getx_starter_template/app/common/util/exports.dart';
@@ -14,25 +13,23 @@ class CustomImageWidget extends StatelessWidget {
   final Color? color;
 
   const CustomImageWidget({
-    Key? key,
+    super.key,
     required this.imageUrl,
     this.size,
     this.radius,
     this.borderRadius,
     this.color,
     this.height,
-  })  : assert(
-          borderRadius == null || radius == null,
-          'Cannot provide both a borderRadius and a radius\n',
-        ),
-        super(key: key);
+  }) : assert(
+         borderRadius == null || radius == null,
+         'Cannot provide both a borderRadius and a radius\n',
+       );
 
   @override
   Widget build(BuildContext context) {
     return (radius != null || borderRadius != null)
         ? ClipRRect(
-                    borderRadius: BorderRadius.circular(radius??0),
-
+            borderRadius: BorderRadius.circular(radius ?? 0),
             child: child,
           )
         : child;
@@ -40,27 +37,25 @@ class CustomImageWidget extends StatelessWidget {
 
   Widget get child =>
       imageUrl == null || (imageUrl != null && imageUrl!.isEmpty)
-          ? placeholder
-          : (GetUtils.isURL(imageUrl ?? Constants.dummyImageUrl) ||
-                  imageUrl!.startsWith('https') ||
-                  imageUrl!.startsWith('http')
-              ? OctoImage(
-                  image: NetworkImage(
-                    imageUrl ?? Constants.dummyImageUrl,
-                  ),
-                  placeholderBuilder:OctoPlaceholder.circleAvatar(backgroundColor: AppColors.caribbeanGreen,text:const Text("No Image")),
-               
-                   
-              
-                  errorBuilder: (context, error, stackTrace) {
-                    return placeholder;
-                  },
-                  fit: BoxFit.cover,
-                  width: size?.width.w,
-                  height: height?.w ?? size?.height.w,
-                  color: color,
-                )
-              : (File(imageUrl!).existsSync()
+      ? placeholder
+      : (GetUtils.isURL(imageUrl ?? Constants.dummyImageUrl) ||
+                imageUrl!.startsWith('https') ||
+                imageUrl!.startsWith('http')
+            ? OctoImage(
+                image: NetworkImage(imageUrl ?? Constants.dummyImageUrl),
+                placeholderBuilder: OctoPlaceholder.circleAvatar(
+                  backgroundColor: AppColors.caribbeanGreen,
+                  text: const Text("No Image"),
+                ),
+                errorBuilder: (context, error, stackTrace) {
+                  return placeholder;
+                },
+                fit: BoxFit.cover,
+                width: size?.width.w,
+                height: height?.w ?? size?.height.w,
+                color: color,
+              )
+            : (File(imageUrl!).existsSync()
                   ? Image.file(
                       File(imageUrl!),
                       width: size?.width.w,
@@ -69,8 +64,5 @@ class CustomImageWidget extends StatelessWidget {
                     )
                   : placeholder));
 
-  Widget get placeholder => Icon(
-        Icons.error,
-        size: size?.width.w,
-      );
+  Widget get placeholder => Icon(Icons.error, size: size?.width.w);
 }

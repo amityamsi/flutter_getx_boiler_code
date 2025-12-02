@@ -1,4 +1,4 @@
-abstract class Strings {
+abstract class AppStrings {
   static const unknownError = 'Unknow error! Please try again after some time.';
   static const connectionTimeout =
       'Connection timeout. Please try again after some time.';
@@ -6,6 +6,7 @@ abstract class Strings {
   static const unauthorize = 'Unauthorize. Please login again!';
 
   static const String appName = 'Getx Template';
+  static const String fontFamily = 'Getx Template';
   static const String ok = 'Ok';
   static const String error = 'Error';
   static const String noInternet = 'No internet. Please try again later.';

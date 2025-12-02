@@ -1,7 +1,6 @@
 import 'package:flutter_getx_starter_template/app/modules/home/bindings/home_binding.dart';
 import 'package:flutter_getx_starter_template/app/modules/home/views/home_view.dart';
 import 'package:get/get.dart';
-
 part 'app_routes.dart';
 
 abstract class AppPages {

@@ -7,11 +7,11 @@ class StrokeBackground extends StatelessWidget {
   final double? height;
 
   const StrokeBackground({
-    Key? key,
+    super.key,
     required this.onTap,
     required this.child,
     this.height,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -20,16 +20,10 @@ class StrokeBackground extends StatelessWidget {
       onTap: onTap,
       child: Container(
         height: height?.h,
-        padding: EdgeInsets.symmetric(
-          horizontal: 10.w,
-          vertical: 10.h,
-        ),
+        padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
         decoration: BoxDecoration(
           borderRadius: 10.borderRadius,
-          border: Border.all(
-            color: Colors.grey[200]!,
-            width: 3.w,
-          ),
+          border: Border.all(color: Colors.grey[200]!, width: 3.w),
         ),
         child: child,
       ),
