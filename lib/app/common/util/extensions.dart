@@ -7,7 +7,6 @@ import '../../data/errors/api_error.dart';
 import '../../data/interface_controller/api_interface_controller.dart';
 import '../constants.dart';
 
-
 abstract class Extensions {}
 
 extension BorderRadiusExt on num {
@@ -96,12 +95,9 @@ extension FutureExt<T> on Future<Response<T>?> {
     final interface = Get.find<ApiInterfaceController>();
     interface.error = null;
 
-
-
     this.timeout(
       Constants.timeout,
       onTimeout: () {
-
         _retry(interface, retryFunction);
 
         throw const ApiError(
@@ -110,8 +106,6 @@ extension FutureExt<T> on Future<Response<T>?> {
         );
       },
     ).then((value) {
-
-
       if (value?.body != null) {
         final result = ApiResponse.getResponse<T>(value!);
         if (result != null) {
@@ -121,7 +115,6 @@ extension FutureExt<T> on Future<Response<T>?> {
 
       interface.update();
     }).catchError((e) {
-
       if (e == null) return;
 
       final String errorMessage = e is ApiError ? e.message : e.toString();
@@ -133,7 +126,7 @@ extension FutureExt<T> on Future<Response<T>?> {
 
           _retry(interface, retryFunction);
         } else {
-       /*   Utils.showDialog(
+          /*   Utils.showDialog(
             errorMessage,
             onTap: errorMessage != AppStrings.unauthorize
                 ? null

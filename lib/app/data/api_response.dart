@@ -1,12 +1,11 @@
 import 'dart:async';
 import 'dart:convert';
-
-import 'package:flutter_getx_starter_template/app/common/values/strings.dart';
+import 'package:flutter_getx_starter_template/app/constants/app_strings.dart';
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/status/http_status.dart';
-
 import 'errors/api_error.dart';
 
+// Update configs accordingly
 abstract class ApiResponse {
   static T? getResponse<T>(Response<T> response) {
     final status = response.status;
@@ -36,7 +35,8 @@ abstract class ApiResponse {
             } else {
               throw ApiError(
                 type: ErrorType.response,
-                error: res['msg']?.toString() ??
+                error:
+                    res['msg']?.toString() ??
                     (res['message']?.toString() ?? AppStrings.unknownError),
               );
             }
