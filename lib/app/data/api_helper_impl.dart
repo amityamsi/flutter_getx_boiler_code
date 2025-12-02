@@ -5,7 +5,7 @@ import 'package:flutter_getx_starter_template/app/common/storage/storage.dart';
 import 'package:get/get.dart';
 import 'api_helper.dart';
 
-class ApiHelperImpl extends GetConnect with ApiHelper {
+class ApiHelperImpl extends GetConnect implements ApiHelper {
   @override
   void onInit() {
     httpClient.baseUrl = Constants.baseUrl;
@@ -15,7 +15,8 @@ class ApiHelperImpl extends GetConnect with ApiHelper {
 
     httpClient.addResponseModifier((request, response) {
       printInfo(
-        info: 'Status Code: ${response.statusCode}\n'
+        info:
+            'Status Code: ${response.statusCode}\n'
             'Data: ${response.bodyString?.toString() ?? ''}',
       );
 
@@ -39,7 +40,8 @@ class ApiHelperImpl extends GetConnect with ApiHelper {
       }
 
       printInfo(
-        info: 'REQUEST ║ ${request.method.toUpperCase()}\n'
+        info:
+            'REQUEST ║ ${request.method.toUpperCase()}\n'
             'url: ${request.url}\n'
             'Headers: ${request.headers}\n'
             'Body: ${request.files?.toString() ?? ''}\n',

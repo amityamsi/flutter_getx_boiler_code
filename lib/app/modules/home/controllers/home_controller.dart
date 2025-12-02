@@ -17,10 +17,9 @@ class HomeController extends GetxController {
   }
 
   void getPosts() {
-    _apiHelper.getApi('posts').futureValue(
-          (value) => dataList = value,
-          retryFunction: getPosts,
-        );
+    _apiHelper
+        .getApi('posts')
+        .futureValue((value) => dataList = value, retryFunction: getPosts);
   }
 
   void onEditProfileClick() {

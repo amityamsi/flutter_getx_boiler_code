@@ -1,14 +1,16 @@
 import 'dart:io';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:flutter_getx_starter_template/app/common/util/helper.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 
 class NetworkHelper {
   /// Checks whether the device is connected to the internet.
   static Future<bool> isConnected() async {
     final connectivityResult = await Connectivity().checkConnectivity();
+    printLog("connectivityResult:--> $connectivityResult");
 
-    print("connectivityResult:--> $connectivityResult");
     if (connectivityResult == ConnectivityResult.none) return false;
+
     return await InternetConnection().hasInternetAccess;
   }
 

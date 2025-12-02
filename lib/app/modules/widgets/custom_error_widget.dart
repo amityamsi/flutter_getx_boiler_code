@@ -5,10 +5,7 @@ import 'package:get/get.dart';
 class CustomErrorWidget extends StatelessWidget {
   final String? message;
 
-  const CustomErrorWidget({
-    Key? key,
-    this.message,
-  }) : super(key: key);
+  const CustomErrorWidget({super.key, this.message});
 
   @override
   Widget build(BuildContext context) {
