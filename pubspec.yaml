@@ -25,7 +25,20 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  flutter_lints: 6.0.0
+  flutter_lints: ^4.0.0
+
+  # flutter pub run change_app_package_name:main com.new.package.name
+  change_app_package_name: ^1.1.0
+  # flutter pub run flutter_launcher_icons:main
+  flutter_launcher_icons: ^0.13.1
+  # flutter pub run flutter_native_splash:create
+  flutter_native_splash: ^2.1.6
+
+flutter_icons:
+  android: "launcher_icon"
+  remove_alpha_ios: true
+  ios: true
+  image_path: "assets/logo/logo.png"
 
 flutter:
   uses-material-design: true
