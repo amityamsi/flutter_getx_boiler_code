@@ -26,7 +26,7 @@ dependencies:
 
 
   #for date formatting
-  intl: ^0.19.0
+  intl: ^0.20.2
 
   octo_image: ^2.0.0
 
