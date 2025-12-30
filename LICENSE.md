@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2022 Rajender Kumar
+Copyright (c) 2025 Codemicros-Amit Yamsi
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -19,3 +19,17 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+dart run bin/gen.dart <module_name>
+dart run bin/gen.dart profile
+
+delete 
+dart run bin/gen.dart delete profile
+
+multiple words
+dart run bin/gen.dart user_settings
+
+
+
+### FOR Generate AppAssets file
+dart run bin/gen_app_assets.dart

@@ -1,20 +1,25 @@
 import 'dart:io';
+
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter_getx_starter_template/app/common/util/helper.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 
 class NetworkHelper {
-  /// Checks whether the device is connected to the internet.
+  // Checks whether the device is connected to the internet.
   static Future<bool> isConnected() async {
-    final connectivityResult = await Connectivity().checkConnectivity();
-    printLog("connectivityResult:--> $connectivityResult");
+    final results = await Connectivity().checkConnectivity();
+    printLog("CURRENT NETWORK CONNECTION || $results\n");
 
-    if (connectivityResult == ConnectivityResult.none) return false;
+    // When NO connection exists → list is empty OR contains ConnectivityResult.none
+    if (results.isEmpty || results.contains(ConnectivityResult.none)) {
+      return false;
+    }
 
+    // Optionally check actual internet
     return await InternetConnection().hasInternetAccess;
   }
 
-  /// Checks approximate internet speed by pinging a reliable host.
+  // Checks approximate internet speed by pinging a reliable host.
   static Future<double> checkSpeed() async {
     try {
       final stopwatch = Stopwatch()..start();
